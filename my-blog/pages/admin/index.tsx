@@ -1,31 +1,42 @@
-import Link from 'next/link'
-import { checkAdminToken } from '../../lib/check_admin'
-import { GetServerSidePropsContext } from 'next'
+import type { GetServerSideProps } from 'next';
+import { parseCookies } from 'nookies';
+import Link from 'next/link';
 
 export default function AdminHome() {
   return (
-    <div>
-      <h1>Admin Panel</h1>
-      <Link href="/admin/new-post">
-        <a>Create New Post</a>
-      </Link>
-      {/* Add more admin links like "Edit Post", etc. */}
+    <div style={{ margin: '2rem' }}>
+      <h1>Welcome to the Admin Panel</h1>
+      <p>You are authenticated as an admin.</p>
+
+      <ul>
+        <li>
+          <Link href="/admin/create">Create Something</Link>
+        </li>
+        <li>
+          <button
+            onClick={async () => {
+              await fetch('/api/admin-logout', { method: 'POST' });
+              window.location.href = '/admin/login';
+            }}
+          >
+            Logout
+          </button>
+        </li>
+      </ul>
     </div>
-  )
+  );
 }
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const isAdmin = checkAdminToken(context)
-  if (!isAdmin) {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const cookies = parseCookies(context);
+  if (cookies.admin !== 'true') {
     return {
       redirect: {
         destination: '/admin/login',
         permanent: false,
       },
-    }
+    };
   }
 
-  return {
-    props: {},
-  }
-}
+  return { props: {} };
+};

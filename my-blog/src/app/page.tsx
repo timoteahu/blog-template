@@ -1,6 +1,4 @@
-import React from 'react'
 import { supabase } from '../../lib/supabaseClient'
-import Link from 'next/link'
 
 interface Post {
   id: number;
@@ -9,43 +7,38 @@ interface Post {
   created_at: string;
 }
 
-export default async function Home() {
-  const { data, error } = await supabase
+export default async function HomePage() {
+  // Fetch posts from Supabase
+  const { data: posts, error } = await supabase
     .from('posts')
     .select('*')
     .order('created_at', { ascending: false })
 
-  let posts: Post[] = data || []  // Use the Post interface to type posts
-
   if (error) {
-    console.error(error)
-    posts = []  // Reassign posts if there's an error
+    console.error('Error fetching posts:', error)
   }
 
   return (
-    <main className="max-w-4xl mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8">My Public Blog</h1>
-      <ul className="space-y-6 mb-8">
-        {posts.map((post) => (
-          <li key={post.id} className="border-b pb-6">
-            <time className="text-gray-500 text-sm">
-              {new Date(post.created_at).toLocaleDateString('en-US')}
-            </time>
-            <h2 className="text-xl font-semibold mt-2">
-              <Link href={`/post/${post.id}`} className="hover:text-blue-600">
-                {post.title}
-              </Link>
-            </h2>
-            <p className="text-gray-700 mt-2">{post.content.substring(0, 100)}...</p>
-          </li>
-        ))}
-      </ul>
-      <Link 
-        href="/admin" 
-        className="inline-block px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
-      >
-        Admin Panel
-      </Link>
-    </main>
-  )
+    <div style={{ margin: '2rem' }}>
+      <h1>Welcome to My Next.js + Supabase App</h1>
+      <p>This is the public homepage.</p>
+      <p>Try going to <strong>/admin</strong> to see the protected admin panel.</p>
+
+      <div className="mt-8">
+        <h2>Latest Posts</h2>
+        {posts ? (
+          <div className="space-y-4">
+            {posts.map((post: Post) => (
+              <article key={post.id} className="border p-4 rounded-lg">
+                <h3 className="text-xl font-bold">{post.title}</h3>
+                <p className="mt-2">{post.content}</p>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <p>Loading posts...</p>
+        )}
+      </div>
+    </div>
+  );
 }
