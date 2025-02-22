@@ -1,44 +1,34 @@
-import { supabase } from '../../lib/supabaseClient'
+import { supabase } from '../../lib/supabaseClient';
 
-interface Post {
-  id: number;
-  title: string;
-  content: string;
-  created_at: string;
+export const revalidate = 0; 
+// or set a number (in seconds) if you want incremental revalidation
+
+async function getPosts() {
+  const { data, error } = await supabase
+    .from('posts')
+    .select('*')
+    .order('id', { ascending: false });
+
+  if (error) {
+    console.error(error);
+    return [];
+  }
+  return data || [];
 }
 
 export default async function HomePage() {
-  // Fetch posts from Supabase
-  const { data: posts, error } = await supabase
-    .from('posts')
-    .select('*')
-    .order('created_at', { ascending: false })
-
-  if (error) {
-    console.error('Error fetching posts:', error)
-  }
+  const posts = await getPosts();
 
   return (
-    <div style={{ margin: '2rem' }}>
-      <h1>Welcome to My Next.js + Supabase App</h1>
-      <p>This is the public homepage.</p>
-      <p>Try going to <strong>/admin</strong> to see the protected admin panel.</p>
-
-      <div className="mt-8">
-        <h2>Latest Posts</h2>
-        {posts ? (
-          <div className="space-y-4">
-            {posts.map((post: Post) => (
-              <article key={post.id} className="border p-4 rounded-lg">
-                <h3 className="text-xl font-bold">{post.title}</h3>
-                <p className="mt-2">{post.content}</p>
-              </article>
-            ))}
-          </div>
-        ) : (
-          <p>Loading posts...</p>
-        )}
-      </div>
-    </div>
+    <main>
+      <h1>My Blog</h1>
+      {posts.map((post) => (
+        <article key={post.id} style={{ marginBottom: '2rem' }}>
+          <h2>{post.title}</h2>
+          <p>{post.content}</p>
+          <small>Posted on: {new Date(post.created_at).toDateString()}</small>
+        </article>
+      ))}
+    </main>
   );
 }
