@@ -100,7 +100,7 @@ export default async function HomePage() {
           <p className="text-gray-500 font-light">No posts yet.</p>
         )}
         
-        <p className="text-sm text-gray-400 italic mt-8 text-center animate-typing">
+        <p className="text-sm text-gray-400 italic mt-8 text-center">
           More thoughts coming soon...
         </p>
       </div>
