@@ -26,39 +26,47 @@ export default async function HomePage() {
   const posts = await getPosts();
 
   return (
-    <main className={`${raleway.className} max-w-4xl mx-auto p-8 animate-fade-in`}>
-      <header className="mb-16 border-b pb-8">
-        <h1 className="text-5xl font-light mb-4">Tim&apos;s Thoughts</h1>
-        <p className="text-gray-600 font-light text-lg mb-4">
-          Exploring ideas, documenting things, and talking about personal insights.
-        </p>
-        <div className="flex space-x-4">
-          <a
-            href="https://twitter.com/yourusername"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-600 hover:text-purple-600 transition-colors"
-          >
-            <FaInstagram size={24} />
-          </a>
-          <a
-            href="https://x.com/yourusername"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-600 hover:text-purple-600 transition-colors"
-          >
-            <FaXTwitter size={24} />
-          </a>
-          <a
-            href="https://linkedin.com/in/yourusername"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-600 hover:text-purple-600 transition-colors"
-          >
-            <FaLinkedin size={24} />
-          </a>
+    <main className={`${raleway.className} max-w-4xl mx-auto p-8 animate-fade-in `}>
+      <header className="mb-16 border-b pb-8 flex flex-col md:flex-row md:justify-between md:items-center">
+        <div>
+          <h1 className="text-5xl font-light mb-4">Tim&apos;s Thoughts</h1>
+          <p className="text-gray-600 dark:text-gray-400 font-light text-lg mb-4">
+            Exploring ideas, documenting things, and talking about personal insights.
+            <br />
+            <span className='text-xs'>This is basically a public diary lmao </span>
+          </p>
         </div>
-        <ThemeToggle />
+        <div className="flex items-center space-x-4">
+          {/* Social Icons */}
+          <div className="flex space-x-4">
+            <a
+              href="https://twitter.com/yourusername"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-600 dark:text-gray-300 hover:text-purple-600 transition-colors"
+            >
+              <FaInstagram size={24} />
+            </a>
+            <a
+              href="https://x.com/yourusername"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-600 dark:text-gray-300 hover:text-purple-600 transition-colors"
+            >
+              <FaXTwitter size={24} />
+            </a>
+            <a
+              href="https://linkedin.com/in/yourusername"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-600 dark:text-gray-300 hover:text-purple-600 transition-colors"
+            >
+              <FaLinkedin size={24} />
+            </a>
+          </div>
+          {/* Theme Toggle */}
+          <ThemeToggle />
+        </div>
       </header>
       
       <div className="space-y-2">
@@ -92,7 +100,9 @@ export default async function HomePage() {
           <p className="text-gray-500 font-light">No posts yet.</p>
         )}
         
-        <p className="text-sm text-gray-400 italic mt-8 text-center">More thoughts coming soon...</p>
+        <p className="text-sm text-gray-400 italic mt-8 text-center animate-typing">
+          More thoughts coming soon...
+        </p>
       </div>
     </main>
   );
