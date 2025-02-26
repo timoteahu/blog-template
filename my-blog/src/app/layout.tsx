@@ -2,8 +2,8 @@ import './globals.css';
 import { ReactNode } from 'react';
 
 export const metadata = {
-  title: 'My Blog',
-  description: 'A Next.js 13 Blog with Supabase Auth',
+  title: "Tim's Thoughts",
+  description: 'A blog about my experiences and thoughts',
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
