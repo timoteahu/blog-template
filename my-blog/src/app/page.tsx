@@ -43,7 +43,7 @@ export default async function HomePage() {
           {/* Social Icons */}
           <div className="flex space-x-4">
             <a
-              href="https://twitter.com/yourusername"
+              href="https://instagram.com/timoteahu"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-600 dark:text-gray-300 hover:text-purple-600 transition-colors"
@@ -51,7 +51,7 @@ export default async function HomePage() {
               <FaInstagram size={24} />
             </a>
             <a
-              href="https://x.com/yourusername"
+              href="https://x.com/timoteahu"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-600 dark:text-gray-300 hover:text-purple-600 transition-colors"
