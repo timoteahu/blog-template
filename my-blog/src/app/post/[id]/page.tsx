@@ -100,9 +100,9 @@ export default async function PostPage({ params }: { params: { id: string } }) {
           </small>
         </div>
 
-        <div className="text-gray-800 dark:text-gray-200 leading-relaxed">
-          {post.content}
-        </div>
+        <p dangerouslySetInnerHTML={{ 
+          __html: post.content.replace(/\n/g, '<br />') 
+        }} />
       </article>
 
       <div className="mt-16 pt-8 border-t">
