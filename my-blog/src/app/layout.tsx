@@ -1,6 +1,8 @@
 import './globals.css';
 import { ReactNode } from 'react';
 import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
+
 export const metadata = {
   icon: {
     icon: '/favicon.ico',
@@ -14,6 +16,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en">
       <body className='bg-white dark:bg-gray-900 transition-colors duration-300'>{children}</body>
       <Analytics />
+      <SpeedInsights />
     </html>
   );
 }
