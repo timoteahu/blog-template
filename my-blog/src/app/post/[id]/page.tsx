@@ -15,11 +15,12 @@ interface Post {
   created_at: string;
 }
 
-async function getPost(id: string): Promise<Post | null> {
+async function getPost(id: string | Promise<string>): Promise<Post | null> {
+  const resolvedId = await id;
   const { data, error } = await supabase
     .from('posts')
     .select('*')
-    .eq('id', id)
+    .eq('id', resolvedId)
     .single();
 
   if (error || !data) {
@@ -29,7 +30,8 @@ async function getPost(id: string): Promise<Post | null> {
 }
 
 export default async function PostPage({ params }: { params: { id: string } }) {
-  const post = await getPost(params.id);
+  const {id}= await params;
+  const post = await getPost(id);
 
   if (!post) {
     notFound();
