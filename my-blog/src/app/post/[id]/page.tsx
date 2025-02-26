@@ -30,7 +30,7 @@ async function getPost(id: string | Promise<string>): Promise<Post | null> {
 }
 
 export default async function PostPage({ params }: { params: { id: string } }) {
-  const {id}= await params;
+  const { id } = params;
   const post = await getPost(id);
 
   if (!post) {
