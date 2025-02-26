@@ -38,7 +38,7 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
   }
 
   return (
-    <main className={`${raleway.className} max-w-4xl mx-auto p-8 animate-fade-in`}>
+    <main className={`${raleway.className} max-w-4xl mx-auto p-8 animate-fade-in text-gray-900 dark:text-gray-100`}>
             <header className="mb-16 border-b pb-8 flex flex-col md:flex-row md:justify-between md:items-center">
         <div>
           <h1 className={`${playfair.className} text-5xl font-semibold mb-4`}>

@@ -27,7 +27,7 @@ export default async function HomePage() {
   const posts = await getPosts();
 
   return (
-    <main className={`${raleway.className} max-w-4xl mx-auto p-8 animate-fade-in `}>
+    <main className={`${raleway.className} max-w-4xl mx-auto p-8 animate-fade-in bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300`}>
       <header className="mb-16 border-b pb-8 flex flex-col md:flex-row md:justify-between md:items-center">
         <div>
           <h1 className={`${playfair.className} text-5xl font-semibold mb-4`}>
@@ -90,14 +90,14 @@ export default async function HomePage() {
             </div>
             <Link 
               href={`/post/${post.id}`}
-              className="inline-block group-hover:text-purple-600 transition-colors"
+              className="inline-block group-hover:text-purple-600"
             >
               <h2 className={`${playfair.className} text-2xl font-semibold`}>
                 {post.title}
               </h2>
             </Link>
             {post.excerpt && (
-              <p className="text-gray-600 dark:text-gray-400 font-light mt-2 transition-colors">
+              <p className="text-gray-600 dark:text-gray-400 font-light mt-2">
                 {post.excerpt}
               </p>
             )}
