@@ -2,6 +2,9 @@ import './globals.css';
 import { ReactNode } from 'react';
 
 export const metadata = {
+  icon: {
+    icon: '/favicon.ico',
+  },
   title: "Tim's Thoughts",
   description: 'A blog about my experiences and thoughts',
 };
